@@ -1,15 +1,18 @@
 import React, {useEffect, useState} from 'react'
-import {obtenerTodos, guardar} from "../../services/EstadoService";
+import {obtenerTodos, guardar, editarporId} from "../../services/EstadoService";
 
 export default function Estado() {
 
 
     const [estados, setEstados] = useState([]);
     const [estado, setEstado] = useState({
+        _id: '',
         nombre: '',
         estado: false
     })
     const [error, setError]  =  useState(false);
+    const [hidden] = useState("hidden")
+    const [loading, setLoading] = useState(false);
 
     useEffect( () => {
         const getEstados = () => {
@@ -35,24 +38,42 @@ export default function Estado() {
     }
 
     const add = e => {
+        setLoading(true);
         e.preventDefault();
-        console.log(estado);
-        guardarEstado();
+        //console.log(estado);
+        if(estado._id){
+            editarEstado();
+        }else{
+            guardarEstado();
+        }
 
     }
 
     const guardarEstado = () => {
         guardar(estado).then(r => {
-            setEstados([...estados, r.data]);
-            changeError(false)
+            console.log('texto')
+            if(estado.estado === 'true'){
+                setEstados([...estados, r.data]);
+                console.log('estado true: ', estado)
+                changeError(false)
+                setLoading(false);
+            }else {
+
+                console.log('estado false: ', estado)
+                setLoading(false);
+                closeModal();
+
+            }
         }).catch(error => {
             console.log(error)
             changeError(true)
+            setLoading(false);
         })
     }
 
     const closeModal = () => {
         setEstado({
+            _id: '',
             nombre: '',
             estado: false
         })
@@ -60,12 +81,43 @@ export default function Estado() {
         changeError(false)
     }
 
+    const openEditById = e => {
+        e.preventDefault();
+        setLoading(true);
+        setTimeout(() => {
+            setLoading(false);
+            const id = e.target.getAttribute("data")
+            const estadoFilter = estados.filter(est => est._id === id)[0];
+            setEstado({
+                ...estadoFilter
+            });
+        }, 1000)
+    }
+
+    const editarEstado = e => {
+        editarporId(estado._id, estado).then(r => {
+            const id = r.data._id;
+            if(!r.data.estado){
+                const activos = estados.filter(est => est._id !== id);
+                setEstados(activos);
+            }
+            changeError(false)
+            setLoading(false);
+        }).catch(error => {
+            console.log(error)
+            changeError(true)
+            setLoading(false);
+        })
+
+    }
+
     return (
         <div className="container"><h1 className='text-center'>Estado </h1>
             <button type="button"
                     className="btn btn-primary"
                     data-bs-toggle="modal"
-                    data-bs-target="#exampleModal">
+                    data-bs-target="#exampleModal"
+                    onClick={closeModal}>
                 <i className="fa-solid fa-file-circle-plus"></i>
             </button>
 
@@ -98,7 +150,11 @@ export default function Estado() {
                                     <td>{actualizacion}</td>
                                     <td>
                                         <button type="button"
-                                                className="btn btn-outline-success">
+                                                className="btn btn-outline-success"
+                                                data-bs-toggle="modal"
+                                                data-bs-target="#exampleModal"
+                                                data={est._id}
+                                                onClick={e => openEditById(e)}>
                                             <i  className="fa-solid fa-pen-to-square"></i>
                                         </button>
 
@@ -122,7 +178,15 @@ export default function Estado() {
                 <div className="modal-dialog">
                     <div className="modal-content">
                         <div className="modal-header">
-                            <h5 className="modal-title" id="exampleModalLabel">Ingrese nuevo estado</h5>
+                            <h5 className="modal-title" id="exampleModalLabel">{estado._id ? 'Editar estado' : 'Ingrese nuevo estado'}</h5>
+                            &nbsp;&nbsp;
+                            {
+                                (loading &&
+                                    <div className="spinner-grow text-success" role="status">
+                                        <span className="visually-hidden">Loading...</span>
+                                    </div>
+                                )
+                            }
                             <button type="button"
                                     className="btn-close"
                                     data-bs-dismiss="modal"
@@ -133,9 +197,12 @@ export default function Estado() {
                         </div>
                         <div className="modal-body">
                             <form onSubmit={add}>
+                                <input type={hidden} name="_id" value={estado._id}></input>
                                 <div className="mb-3">
                                     <label htmlFor="recipient-name" className="col-form-label">Nombre:</label>
                                     <input required
+                                           disabled={estado._id ? true : false}
+                                           readOnly={estado._id ? true : false}
                                            value={estado.nombre}
                                            name="nombre"
                                            type="text"
@@ -166,8 +233,10 @@ export default function Estado() {
                                         <i className="fa-solid fa-arrow-right-from-bracket"></i> Cancelar
                                     </button>
                                     <button type="submit"
-                                            className="btn btn-primary">
-                                        <i className="fa-solid fa-floppy-disk"></i> Enviar
+                                            className="btn btn-primary"
+                                            data-bs-dismiss="modal">
+
+                                        <i  className="fa-solid fa-floppy-disk"></i> Enviar
                                     </button>
                                 </div>
 
