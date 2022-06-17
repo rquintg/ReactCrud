@@ -3,7 +3,7 @@ import React from 'react'
 export default function TablaModulos({componentes, openEditById}) {
     return (
         <div className="table-responsive">
-            <table className="table">
+            <table className="table table-hover table-bordered table-striped">
                 <thead>
                 <tr>
                     <th scope="col"><i className="fa-solid fa-users-viewfinder"></i></th>
@@ -19,8 +19,8 @@ export default function TablaModulos({componentes, openEditById}) {
                     componentes.map((est, index) => {
                         const date1 =  new Date(est.createdAt);
                         const date2 =  new Date(est.updatedAt);
-                        const creacion = date1.getDay()+"/"+date1.getMonth()+"/"+date1.getFullYear();
-                        const actualizacion = date2.getDay()+"/"+date2.getMonth()+"/"+date2.getFullYear();
+                        const creacion = date1.getDay()+"/"+date1.getMonth()+"/"+date1.getFullYear()+"-"+date1.getHours()+":"+date1.getMinutes();
+                        const actualizacion = date2.getDay()+"/"+date2.getMonth()+"/"+date2.getFullYear()+"-"+date1.getHours()+":"+date1.getMinutes();
 
                         return(
                             <tr key={est._id}>
