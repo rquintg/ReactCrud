@@ -117,7 +117,9 @@ export default function Estado() {
 
     return (
         <div className="container">
-            <h1 className='text-center'>Estado </h1>
+            <div className="d-flex justify-content-center ">
+                <h1 className='text-white bg-secondary border border-4 rounded-4 p-2'>Estado de equipos </h1>
+            </div>
                 <button type="button"
                         className="btn btn-primary"
                         data-bs-toggle="modal"
@@ -125,6 +127,8 @@ export default function Estado() {
                         onClick={closeModal}>
                     <i className="fa-solid fa-file-circle-plus"></i>
                 </button>
+                <br/>
+                <br/>
 
                 <TablaModulos componentes={estados}
                               openEditById={openEditById}
