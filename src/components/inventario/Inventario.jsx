@@ -8,9 +8,16 @@ export default function Inventario() {
     const [estados, setEstados] = useState([]);
     const [estado, setEstado] = useState({
         _id: '',
-        nombre: '',
-        estado: false,
-        usuarios: '',
+        serial: '',
+        modelo: '',
+        descripcion: '',
+        foto: '',
+        color:'',
+        precio: '',
+        email: '',
+        marcas: '',
+        estados: '',
+        tipoEquipos: '',
 
     })
     const [error, setError]  =  useState(false);
@@ -44,7 +51,7 @@ export default function Inventario() {
     const add = e => {
         setLoading(true);
         e.preventDefault();
-        //console.log(estado);
+        console.log(estado);
         if(estado._id){
             editarEstado();
         }else{
@@ -55,20 +62,37 @@ export default function Inventario() {
     }
 
     const guardarEstado = () => {
+
+        // const request = {
+        //     serial: estado.serial,
+        //     modelo: estado.modelo,
+        //     descripcion: estado.descripcion,
+        //     foto: estado.foto,
+        //     color:estado.color,
+        //     precio: estado.precio,
+        //     usuarios: {
+        //         email: estado.usuarios
+        //     },
+        //     marcas: {
+        //         nombre: estado.marcas
+        //     },
+        //     estados: {
+        //         nombre: estado.estados
+        //     },
+        //     tipoEquipos: {
+        //         nombre: estado.tipoEquipos
+        //     },
+        //
+        // }
+
+        console.log('req: ',estado)
         guardar(estado).then(r => {
-            console.log('texto')
-            if(estado.estado === 'true'){
+
                 setEstados([...estados, r.data]);
-                console.log('estado true: ', estado)
+
                 changeError(false)
                 setLoading(false);
-            }else {
 
-                console.log('estado false: ', estado)
-                setLoading(false);
-                closeModal();
-
-            }
         }).catch(error => {
             console.log(error)
             changeError(true)
@@ -79,9 +103,16 @@ export default function Inventario() {
     const closeModal = () => {
         setEstado({
             _id: '',
-            nombre: '',
-            estado: false,
-            usuarios: '',
+            serial: '',
+            modelo: '',
+            descripcion: '',
+            foto: '',
+            color:'',
+            precio: '',
+            email: '',
+            marcas: '',
+            estados: '',
+            tipoEquipos: '',
         })
 
         changeError(false)

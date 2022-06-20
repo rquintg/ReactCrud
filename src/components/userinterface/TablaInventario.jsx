@@ -6,17 +6,17 @@ export default function TablaInventario({componentes, openEditById}) {
             <table className="table table-hover table-bordered table-striped">
                 <thead>
                 <tr>
-                    <th scope="col"><i className="fa-solid fa-users-viewfinder"></i></th>
-                    <th scope="col">Serial</th>
-                    <th scope="col">Modelo</th>
-                    <th scope="col">Descripcion</th>
-                    <th scope="col">Foto</th>
-                    <th scope="col">Precio</th>
-                    <th scope="col">Usuario</th>
-                    <th scope="col">Marca</th>
-                    <th scope="col">Estado</th>
-                    <th scope="col">Tipo</th>
-                    <th scope="col">Acciones</th>
+                    <th scope="col" className="text-center"><i className="fa-solid fa-users-viewfinder"></i></th>
+                    <th scope="col" className="text-center">Serial</th>
+                    <th scope="col" className="text-center">Modelo</th>
+                    <th scope="col" className="text-center">Descripcion</th>
+                    <th scope="col" className="text-center">Foto</th>
+                    <th scope="col" className="text-center">Precio</th>
+                    <th scope="col" className="text-center">Usuario</th>
+                    <th scope="col" className="text-center">Marca</th>
+                    <th scope="col" className="text-center">Estado</th>
+                    <th scope="col" className="text-center">Tipo Equipo</th>
+                    <th scope="col" className="text-center">Acciones</th>
                 </tr>
                 </thead>
                 <tbody>
@@ -25,30 +25,32 @@ export default function TablaInventario({componentes, openEditById}) {
 
                         return(
                             <tr key={est._id}>
-                                <th scope="row">{index + 1}</th>
-                                <td>{est.serial}</td>
-                                <td>{est.modelo ? 'Activo' : 'Inactivo'}</td>
-                                <td>{est.descripcion}</td>
-                                <td>{est.foto}</td>
-                                <td>{est.precio}</td>
-                                <td>{est.usuarios}</td>
-                                <td>{est.marcas}</td>
-                                <td>{est.estados}</td>
-                                <td>{est.tipoEquipos}</td>
-                                <td>
+                                <th scope="row" className="text-center" >{index + 1}</th>
+                                <td className="text-center">{est.serial}</td>
+                                <td className="text-center">{est.modelo}</td>
+                                <td className="text-center">{est.descripcion}</td>
+                                <td className="text-center">{est.foto}</td>
+                                <td className="text-center">{est.precio}</td>
+                                <td className="text-center">{est.usuarios}</td>
+                                <td className="text-center">{est.marcas}</td>
+                                <td className="text-center">{est.estados}</td>
+                                <td className="text-center">{est.tipoEquipos}</td>
+                                <td className="text-center">
                                     <button type="button"
                                             className="btn btn-outline-success"
                                             data-bs-toggle="modal"
                                             data-bs-target="#exampleModal"
                                             data={est._id}
                                             onClick={e => openEditById(e)}>
-                                        <i  className="fa-solid fa-pen-to-square"></i>
+                                        <i  className="fa-solid fa-pen-to-square"
+                                            data={est._id}
+                                            onClick={e => openEditById(e)}></i>
                                     </button>
 
-                                    <button type="button"
-                                            className="btn btn-outline-danger">
-                                        <i className="fa-solid fa-trash"></i>
-                                    </button>
+                                    {/*<button type="button"*/}
+                                    {/*        className="btn btn-outline-danger">*/}
+                                    {/*    <i className="fa-solid fa-trash"></i>*/}
+                                    {/*</button>*/}
 
                                 </td>
                             </tr>
