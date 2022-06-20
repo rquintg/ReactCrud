@@ -6,12 +6,12 @@ export default function TablaModulos({componentes, openEditById}) {
             <table className="table table-hover table-bordered table-striped">
                 <thead>
                 <tr>
-                    <th scope="col"><i className="fa-solid fa-users-viewfinder"></i></th>
-                    <th scope="col">Nombre</th>
-                    <th scope="col">Estado</th>
-                    <th scope="col">Creacion</th>
-                    <th scope="col">Actualización</th>
-                    <th scope="col">Acciones</th>
+                    <th scope="col" className="text-center"><i className="fa-solid fa-users-viewfinder"></i></th>
+                    <th scope="col" className="text-center">Nombre</th>
+                    <th scope="col" className="text-center">Estado</th>
+                    <th scope="col" className="text-center">Creacion</th>
+                    <th scope="col" className="text-center">Actualización</th>
+                    <th scope="col" className="text-center">Acciones</th>
                 </tr>
                 </thead>
                 <tbody>
@@ -24,11 +24,11 @@ export default function TablaModulos({componentes, openEditById}) {
 
                         return(
                             <tr key={est._id}>
-                                <th scope="row">{index + 1}</th>
-                                <td>{est.nombre}</td>
-                                <td>{est.estado ? 'Activo' : 'Inactivo'}</td>
-                                <td>{creacion}</td>
-                                <td>{actualizacion}</td>
+                                <th scope="row" className="text-center">{index + 1}</th>
+                                <td className="text-center" >{est.nombre}</td>
+                                <td className="text-center" >{est.estado ? 'Activo' : 'Inactivo'}</td>
+                                <td className="text-center" >{creacion}</td>
+                                <td className="text-center" >{actualizacion}</td>
                                 <td>
                                     <button type="button"
                                             className="btn btn-outline-success"
@@ -36,13 +36,15 @@ export default function TablaModulos({componentes, openEditById}) {
                                             data-bs-target="#exampleModal"
                                             data={est._id}
                                             onClick={e => openEditById(e)}>
-                                        <i  className="fa-solid fa-pen-to-square"></i>
+                                        <i  className="fa-solid fa-pen-to-square"
+                                            data={est._id}
+                                            onClick={e => openEditById(e)}></i>
                                     </button>
 
-                                    <button type="button"
-                                            className="btn btn-outline-danger">
-                                        <i className="fa-solid fa-trash"></i>
-                                    </button>
+                                    {/*<button type="button"*/}
+                                    {/*        className="btn btn-outline-danger">*/}
+                                    {/*    <i className="fa-solid fa-trash"></i>*/}
+                                    {/*</button>*/}
 
                                 </td>
                             </tr>

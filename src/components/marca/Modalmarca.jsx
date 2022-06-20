@@ -30,8 +30,6 @@ export default function ModalWindow({estado, loading, hidden, error, add, closeM
                             <div className="mb-3">
                                 <label htmlFor="recipient-name" className="col-form-label">Nombre:</label>
                                 <input required
-                                       disabled={estado._id ? true : false}
-                                       readOnly={estado._id ? true : false}
                                        value={estado.nombre}
                                        name="nombre"
                                        type="text"
@@ -41,6 +39,8 @@ export default function ModalWindow({estado, loading, hidden, error, add, closeM
                             <div className="mb-3">
                                 <label htmlFor="message-text" className="col-form-label">Estado:</label>
                                 <select required
+                                        disabled={estado._id ? true : false}
+                                        readOnly={estado._id ? true : false}
                                         className="form-select"
                                         aria-label="Default select example"
                                         value={estado.estado}

@@ -55,18 +55,12 @@ export default function Marca() {
     const guardarEstado = () => {
         guardar(estado).then(r => {
             console.log('texto')
-            if(estado.estado === 'true'){
+
                 setEstados([...estados, r.data]);
-                console.log('estado true: ', estado)
+                //console.log('estado true: ', estado)
                 changeError(false)
                 setLoading(false);
-            }else {
 
-                console.log('estado false: ', estado)
-                setLoading(false);
-                closeModal();
-
-            }
         }).catch(error => {
             console.log(error)
             changeError(true)
@@ -103,6 +97,12 @@ export default function Marca() {
             if(!r.data.estado){
                 const activos = estados.filter(est => est._id !== id);
                 setEstados(activos);
+                obtenerTodos().then(r => {
+                    console.log(r);
+                    setEstados(r.data.tasks);
+                }).catch(e => {
+                    console.log(e)
+                })
             }
             changeError(false)
             setLoading(false);
@@ -117,7 +117,7 @@ export default function Marca() {
     return (
         <div className="container">
             <div className="d-flex justify-content-center ">
-                <h1 className='text-white bg-secondary border border-4 rounded-4 p-2'>Marcas</h1>
+                <h1 className='text-white bg-warning border  rounded-4 p-2'>Marcas</h1>
             </div>
 
 
