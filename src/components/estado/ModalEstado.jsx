@@ -1,6 +1,6 @@
 import React from 'react'
 
-export default function ModalWindow({estado, loading, hidden, error, add, closeModal, changeEstado}) {
+export default function ModalEstado({estado, loading, hidden, error, add, closeModal, changeEstado}) {
     return (
         <div className="modal fade" id="exampleModal" tabIndex="-1" aria-labelledby="exampleModalLabel"
              aria-hidden="true">

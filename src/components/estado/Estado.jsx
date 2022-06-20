@@ -1,7 +1,7 @@
 import React, {useEffect, useState} from 'react'
 import {obtenerTodos, guardar, editarporId} from "../../services/EstadoService";
 import TablaModulos from "../userinterface/TablaModulos";
-import ModalWindow from "./ModalWindow";
+import ModalEstado from "./ModalEstado";
 
 export default function Estado() {
 
@@ -87,6 +87,7 @@ export default function Estado() {
 
     const openEditById = e => {
         e.preventDefault();
+        closeModal();
         setLoading(true);
         setTimeout(() => {
             setLoading(false);
@@ -104,6 +105,12 @@ export default function Estado() {
             if(!r.data.estado){
                 const activos = estados.filter(est => est._id !== id);
                 setEstados(activos);
+                obtenerTodos().then(r => {
+                    console.log(r);
+                    setEstados(r.data.tasks);
+                }).catch(e => {
+                    console.log(e)
+                })
             }
             changeError(false)
             setLoading(false);
@@ -118,7 +125,7 @@ export default function Estado() {
     return (
         <div className="container">
             <div className="d-flex justify-content-center ">
-                <h1 className='text-white bg-secondary border border-4 rounded-4 p-2'>Estado de equipos </h1>
+                <h1 className='text-white bg-warning border  rounded-4 p-2'>Estado de equipos </h1>
             </div>
                 <button type="button"
                         className="btn btn-primary"
@@ -134,7 +141,7 @@ export default function Estado() {
                               openEditById={openEditById}
                 />
 
-                <ModalWindow
+                <ModalEstado
                     estado={estado}
                     loading={loading}
                     closeModal={closeModal}
