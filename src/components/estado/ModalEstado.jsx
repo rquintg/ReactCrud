@@ -36,6 +36,7 @@ export default function ModalEstado({estado, loading, hidden, error, add, closeM
                                        name="nombre"
                                        type="text"
                                        className="form-control"
+                                       placeholder="Ingrese Estado de equipo"
                                        onChange={changeEstado}/>
                             </div>
                             <div className="mb-3">

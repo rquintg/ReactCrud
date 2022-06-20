@@ -34,6 +34,7 @@ export default function ModalWindow({estado, loading, hidden, error, add, closeM
                                        name="nombre"
                                        type="text"
                                        className="form-control"
+                                       placeholder="Ingrese Marca"
                                        onChange={changeEstado}/>
                             </div>
                             <div className="mb-3">

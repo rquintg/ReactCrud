@@ -45,7 +45,7 @@ export default function TipoEquipos() {
         setLoading(true);
         e.preventDefault();
         //console.log(estado);
-        if(estado._id){
+            if(estado._id){
             editarEstado();
         }else{
             guardarEstado();
@@ -55,8 +55,17 @@ export default function TipoEquipos() {
     }
 
     const guardarEstado = () => {
-        guardar(estado).then(r => {
-            console.log('texto')
+
+        const request = {
+            nombre: estado.nombre,
+            estado: estado.estado,
+            usuarios: {
+                email: estado.usuarios
+            }
+        }
+        console.log('holis')
+        guardar(request).then(r => {
+            console.log('despues de guardar ',request)
             if(estado.estado === 'true'){
                 setEstados([...estados, r.data]);
                 console.log('estado true: ', estado)
@@ -126,7 +135,7 @@ export default function TipoEquipos() {
     return (
         <div className="container">
             <div className="d-flex justify-content-center ">
-                <h1 className='text-white bg-secondary border border-4 rounded-4 p-2'>Tipos de Equipos</h1>
+                <h1 className='text-white bg-warning border  rounded-4 p-2'>Tipos de Equipos</h1>
             </div>
 
 

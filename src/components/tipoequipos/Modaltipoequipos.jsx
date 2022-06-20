@@ -30,19 +30,25 @@ export default function Modaltipoequipos({estado, loading, hidden, error, add, c
                             <div className="mb-3">
                                 <label htmlFor="recipient-name" className="col-form-label">Nombre:</label>
                                 <input required
+                                       disabled={estado._id ? true : false}
+                                       readOnly={estado._id ? true : false}
                                        value={estado.nombre}
                                        name="nombre"
                                        type="text"
                                        className="form-control"
+                                       placeholder="Ingrese Tipo de Equipo"
                                        onChange={changeEstado}/>
                             </div>
                             <div className="mb-3">
                                 <label htmlFor="recipient-name" className="col-form-label">Usuario:</label>
                                 <input required
+                                       disabled={estado._id ? true : false}
+                                       readOnly={estado._id ? true : false}
                                        value={estado.usuarios}
                                        name="usuarios"
                                        type="text"
                                        className="form-control"
+                                       placeholder="Ej: julio@iudigital.com"
                                        onChange={changeEstado}/>
                             </div>
                             <div className="mb-3">
