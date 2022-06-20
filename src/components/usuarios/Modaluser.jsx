@@ -33,6 +33,7 @@ export default function Modaluser({estado, loading, hidden, error, add, closeMod
                                        value={estado.nombre}
                                        name="nombre"
                                        type="text"
+                                       placeholder="Ingrese Nombre"
                                        className="form-control"
                                        onChange={changeEstado}/>
                             </div>
@@ -40,9 +41,12 @@ export default function Modaluser({estado, loading, hidden, error, add, closeMod
                             <div className="mb-3">
                                 <label htmlFor="recipient-name" className="col-form-label">Email:</label>
                                 <input required
+                                       disabled={estado._id ? true : false}
+                                       readOnly={estado._id ? true : false}
                                        value={estado.email}
                                        name="email"
                                        type="text"
+                                       placeholder="Ej: correo@iudigital.com"
                                        className="form-control"
                                        onChange={changeEstado}/>
                             </div>

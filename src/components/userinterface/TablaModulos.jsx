@@ -29,7 +29,7 @@ export default function TablaModulos({componentes, openEditById}) {
                                 <td className="text-center" >{est.estado ? 'Activo' : 'Inactivo'}</td>
                                 <td className="text-center" >{creacion}</td>
                                 <td className="text-center" >{actualizacion}</td>
-                                <td>
+                                <td className="text-center">
                                     <button type="button"
                                             className="btn btn-outline-success"
                                             data-bs-toggle="modal"
